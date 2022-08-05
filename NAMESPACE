@@ -1,0 +1,31 @@
+import(igraph)
+import(doParallel)
+import(sRACIPE)
+
+export(
+  gen_RACIPE,
+  gen_heatmap_hca,
+  gen_pca_plot,
+  modClustHCA,
+  modClustKmeans,
+  geneClustInd,
+  geneClustMedian,
+  reordering,
+  centMedVarCutDistPerc,
+  find_inout,
+  difLen,
+  delEdges_topNew,
+  signChanges_top,
+  adjMatCGrProb,
+  initialize_topology,
+  convAdjTop,
+  convTopAdj,
+  find_topology,
+  find_in_list,
+  gaInitial_gen,
+  inNWsimilarityRefCGr,
+  inNrepsample_topology,
+  SacoGraci_optimization_combined,
+  SacoGraci_optimization_MH
+)
+

@@ -1,0 +1,14 @@
+Package: SacoGraci
+Type: Package
+Title: SacoGraci, a data-driven optimization method for coarse-graining gene regulatory networks
+Version: 1.0
+Author: Cristian Caranica, Mingyang Lu
+Maintainer: Cristian Caranica <c.caranica@northeastern.edu>
+Description: SacoGraci R package for gene network coarse-graining
+License: MIT License
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+NeedsCompilation: no
+LinkingTo: 
+Imports: sRACIPE, igraph, doParallel
