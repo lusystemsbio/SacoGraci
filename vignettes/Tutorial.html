@@ -247,7 +247,7 @@ gene_list[[4]] = c(&quot;KLF4&quot;,&quot;SMAD3&quot;,&quot;MYC&quot;,&quot;REST
 </div>
 <div id="optimize-circuit-with-metropolis-hastings-mh" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> Optimize circuit with Metropolis-Hastings (MH)</h1>
-<p>SacoGraci_optimization is the main function for circuit optimization. Due to high computational cost, we recommend to use high performance computing resources. We recommend to use (numbThr = 40, nSim = 10, nRepeat= 5, nIter = 1400, modelsCGr = 10000) for a robust circuit optimization. But in the illustration, we chose the following parameters to only to generate quick results. The temperature (“temM”) is set to be 60 in this example.</p>
+<p>SacoGraci_optimization is the main function for circuit optimization. Due to high computational cost, we recommend to use high performance computing resources. We recommend to use (nRepeat= 5, nIter = 1400, modelsCGr = 10000) for a robust circuit optimization. But in the illustration, we chose the following parameters to only to generate quick results. The temperature (“temM”) is set to be 60 in this example.</p>
 <pre class="r"><code>circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
                   cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
                   gene_list = gene_list, init_top = inTopsM[1,], 
