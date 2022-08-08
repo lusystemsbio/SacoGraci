@@ -10,8 +10,11 @@
 # scoresOuts (output): 1: the total score, 2: the number of noisy models
 inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_list, inNodes, topol_cgr, modelsCGr = 10000)
 {
+  require(sRACIPE)
   #topol_cgr<-newt_top
   #dataRow doesn't include expression(noise) of input genes 
+  #topol_cgr<-lastTop
+  #inNodes<-0
   numb_genes<-dim(dataRow)[1]#=number of non-input species(genes)
   modelsRef<-dim(dataRow)[2]
   numbCGRn<-length(gene_list)#it includes input and output nodes
@@ -122,12 +125,22 @@ inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_lis
   sizeClref<-rep(0,numbClusterRef)
   avgCl<-rep(0,numbClusterRef)
   chScore<-FALSE
+  penMisCl<-FALSE
+
   for(ila in 1:numbClusterRef)
   {
     indCAv<-which(clusterCutSimM[,1]==ila)
     sizeCl[ila]<-length(indCAv)
     sizeClref[ila]<-length(which(clusterRef==ila))
-    avgCl[ila]<-median(clusterCutSimM[indCAv,3])
+    if(sizeCl[ila]>0)
+    {
+     avgCl[ila]<-median(clusterCutSimM[indCAv,3])
+    }
+    if(sizeCl[ila]==0)
+    {
+     avgCl[ila]<-10
+    }
+
     if(sizeCl[ila]<(0.5*sizeClref[ila]))
     {
       chScore<-TRUE
@@ -136,7 +149,14 @@ inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_lis
   }
   
   scoresOut[2]<-(modelsCGr/numbClusterRef)*sum(avgCl)
-  scoresOut[3]<-sum(clusterCutSimM[indZe,3])
+  if(scoresOut[1]==0)
+  {
+    scoresOut[3]<-0
+  }
+  if(scoresOut[1]>0)
+  {
+    scoresOut[3]<-sum(clusterCutSimM[indZe,3])
+  }
   scoresOut[4]<-scoresOut[2]+scoresOut[3]
   if(chScore==TRUE)
   {
@@ -144,5 +164,5 @@ inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_lis
   }
   
   return(c(scoresOut[4],scoresOut[1]))
-  
 } 
+

@@ -847,3 +847,30 @@ inNrepsample_topology<-function(adj_matrPr, numb_cgnodes, inNodes, outNodes, old
   }
   
 }#end function
+
+####Visualize network topology
+#tf_links: circuit topology
+#height: plot height ("300px")
+#(output): network plot
+plot_network <- function(tf_links, height = "300px"){
+  require(visNetwork)
+  topology=data.frame(as.matrix(tf_links), stringsAsFactors = F)
+
+  node_list <- unique(c(topology[,1], topology[,2]))
+  nodes <- data.frame(id = node_list, label = node_list, font.size =30, value=c(rep(1,length(node_list))))
+  
+  edge_col <- data.frame(c(1,2),c("blue","darkred"))
+  colnames(edge_col) <- c("relation", "color")
+  arrow_type <- data.frame(c(1,2),c("arrow","circle"))
+  colnames(arrow_type) <- c("type", "color")
+  edges <- data.frame(from =c(topology[,1]), to = c(topology[,2])
+                      , arrows.to.type	=arrow_type$color[c(as.numeric(topology[,3]))]
+                      , width = 3
+                      , color = edge_col$color[c(as.numeric(topology[,3]))]
+  )
+  visNetwork(nodes, edges, height = height, width = "100%") %>%
+    visEdges(arrows = "to") %>%
+    visOptions(manipulation = TRUE) %>%
+    visLayout(randomSeed = 123) %>%
+    visPhysics(solver = "forceAtlas2Based", stabilization = FALSE)
+}

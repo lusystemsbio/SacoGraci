@@ -11,4 +11,4 @@ LazyData: true
 VignetteBuilder: knitr
 NeedsCompilation: no
 LinkingTo: 
-Imports: sRACIPE, igraph, doParallel
+Imports: sRACIPE, igraph, doParallel, visNetwork

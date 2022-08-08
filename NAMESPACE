@@ -1,6 +1,7 @@
 import(igraph)
 import(doParallel)
 import(sRACIPE)
+import(visNetwork)
 
 export(
   gen_RACIPE,
@@ -22,10 +23,12 @@ export(
   convTopAdj,
   find_topology,
   find_in_list,
+  plot_network,
   gaInitial_gen,
   inNWsimilarityRefCGr,
   inNrepsample_topology,
-  SacoGraci_optimization_combined,
-  SacoGraci_optimization_MH
+  opt_combined,
+  opt_MH,
+  opt_SA
 )
 

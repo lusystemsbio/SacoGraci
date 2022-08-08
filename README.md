@@ -22,4 +22,4 @@ install_github("lusystemsbio/SacoGraci", dependencies=T, build_vignettes = T)
 
 ### Tutorial:
 
-https://htmlpreview.github.io/?https://github.com/lusystemsbio/SacoGraci/blob/master/vignettes/Tutorial.html
+https://htmlpreview.github.io/?https://github.com/lusystemsbio/SacoGraci/blob/main/vignettes/Tutorial.html

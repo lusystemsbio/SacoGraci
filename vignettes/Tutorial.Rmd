@@ -27,12 +27,12 @@ First, the topology of the GRN is loaded. The topology file "Ex_topology.csv" is
 
 ```{r}
 library(SacoGraci)
+set.seed(43)
 top_ex = read.csv("Ex_topology.csv", header=T)
 ```
 
-The network topology can be visualized with "plot_network" from the [NetAct](https://github.com/lusystemsbio/NetAct) package.
+The network topology can be visualized with function "plot_network" 
 ```
-library(NetAct)
 plot_network(top_ex4)
 ```
 <center> ![](network_ex.png){width=50%} </center>
@@ -98,15 +98,32 @@ inTopsM <-gaInitial_gen(circuit_top = top_ex, gene_list = gene_list, numbNewTop 
 
 # Optimize circuit with Metropolis-Hastings (MH)
 
-SacoGraci_optimization is the main function for circuit optimization. Due to high computational cost, we recommend to use high performance computing resources. We recommend to use (numbThr = 40, nSim = 10, nRepeat= 5, nIter = 1400, modelsCGr = 10000) for a robust circuit optimization. But in the illustration, we chose the following parameters to only to generate quick results. The temperature ("temM") is set to be 60 in this example. One can choose to use other sampling algorithms, such as simulated annealing (SA) and temerature tempering (TE). (?Need to explain how to read the results?)
-
-```{r}
-SacoGraci_optimization_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
-                       cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
-                       gene_list = gene_list, inTopsM = inTopsM, output = "Results",
-                       numbThr = 2, nSim = 2, nRepeat = 1, nIter = 10, modelsCGr = 100, tempM = 60)
+SacoGraci_optimization is the main function for circuit optimization. Due to high computational cost, we recommend to use high performance computing resources. We recommend to use (numbThr = 40, nSim = 10, nRepeat= 5, nIter = 1400, modelsCGr = 10000) for a robust circuit optimization. But in the illustration, we chose the following parameters to only to generate quick results. The temperature ("temM") is set to be 60 in this example. 
+ 
+```{r, message=FALSE}
+circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
+                  cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
+                  gene_list = gene_list, init_top = inTopsM[1,], 
+                  output = "Results1", nRepeat= 1, nIter = 10, modelsCGr = 100, 
+                  tempM = 60)
 ```
 
+The topology of the optimized CGC can be visualized with "plot_network" 
+```
+plot_network(circuit1)
+```
+<center> ![](cgc_ex.png){width=30%} </center>
+
+One can choose to use other sampling algorithms, such as simulated annealing (SA). 
+
+```
+circuit2 = opt_SA(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
+                  cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
+                  gene_list = gene_list, init_top = inTopsM[1,], 
+                  output = "Results2", nRepeat= 1, modelsCGr = 100, 
+                  maxT=150, threshT=40, decayRate1=0.8, decayRate2=0.6, iter_per_temp=2)
+plot_network(circuit2)
+```
 # References
 
 Caranica & Lu (2022) A Data-Driven Optimization Method for Coarse-Graining Gene Regulatory Networks, bioRxiv xxx; doi: https://doi.org/xxx

@@ -1,19 +1,23 @@
-#### Circuit optimization 
-#network_top: the topology of the full network
+#### Circuit optimization (combined MH, MA & TE)
+#network_top: topology of the full network
 # data: processed gene expression matrix
-# clusterRef: the cluster indices of all models
+# clusterRef: cluster indices of all models
 # cenMedRef: cluster centers
 # cutOffM: cluster radii
 # gene_list: gene clustering output 
 # inTopsM: a list of all initial circuit topologies
 # output: a string of file prefix for saving results ("Results")
-# numbThr: the number of HPC threads
+# nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
+#          A new circuit is simulated by RACIPE nRepeat times for robust score evaluations; 
+#          The scores will then be saved and used in future iterations, when the circuits are sampled again.
+# nIter: number of iterations for each simulation 
+# modelsCGr: number of RACIPE models to be simulated (10000)
+# numbThr: number of HPC threads
 # nSim: number of simultaneous simulations 
-# nRepeat: number of repeats of RACIPE simulations for each new circuit topology
-# modelsCGr: the number of RACIPE models to be simulated (10000)
-# (output): 
-SacoGraci_optimization_combined <- function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM, output = "Results",
-                                   numbThr = 40, nSim = 20, nRepeat= 5, nIter = 1400, modelsCGr = 10000){
+# (output): (in results files)
+opt_combined <- function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM,
+                         output = "Results", nRepeat= 5, nIter = 1400, modelsCGr = 10000, 
+                         numbThr = 40, nSim = 20){
   require(doParallel)
 
   dataRow = t(data)
