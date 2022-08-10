@@ -1,12 +1,14 @@
-### RACIPE simulations
-# dftop: circuit topology
-# nModels: number of RACIPE models generated
-# integrateStepSize: step size for the ODE integration
-# simulationTime: simulation time of ODE for each RACIPE model
-# logscData (output): simulated data after log scaling and standardization
+#' RACIPE simulations
+#' @param dftop: circuit topology
+#' @param nModels: number of RACIPE models generated
+#' @param integrateStepSize: step size for the ODE integration
+#' @param simulationTime: simulation time of ODE for each RACIPE model
+#' @return logscData: simulated data after log scaling and standardization
+#' @export
+#' @import sRACIPE
 gen_RACIPE <-function(dftop, nModels, integrateStepSize = 0.02, simulationTime = 200)
 {
-  require(sRACIPE)
+#  require(sRACIPE)
   rac2agCore<-sracipeSimulate(circuit = dftop, numModels = nModels, plots = FALSE, 
                               integrateStepSize, simulationTime)
   
@@ -20,10 +22,11 @@ gen_RACIPE <-function(dftop, nModels, integrateStepSize = 0.02, simulationTime =
   return(logscData)
 }
 
-#### MODEL CLUSTERING BY HCA
-# logscData: simulated data after log scaling and standardization
-# numbClust: number of model clusters
-# res (output): model clustering output: (1: cluster sizes; 2: clustering rearranged data; 3: cluster indices)
+#' Model Clustering By hierarchical clustering analysis (HCA)
+#' @param logscData: simulated data after log scaling and standardization
+#' @param numbClust: number of model clusters
+#' @return res: model clustering output: (1: cluster sizes; 2: clustering rearranged data; 3: cluster indices)
+#' @export
 modClustHCA<-function(logscData,numbClust)
 {
 
@@ -51,8 +54,9 @@ modClustHCA<-function(logscData,numbClust)
   return(res)
 }
 
-####generating HCA heatmap 
-# logscData: simulated data after log scaling and standardization
+#' Generating HCA Heatmap 
+#' @param logscData: simulated data after log scaling and standardization
+#' @export
 gen_heatmap_hca <- function(logscData){
   dist.pear = function(x) as.dist(1-cor(t(x)))
   hclust.ward = function(x) hclust(x, method="ward.D2")
@@ -60,8 +64,9 @@ gen_heatmap_hca <- function(logscData){
   ht3emt<-heatmap(logscData, distfun=dist.pear, hclustfun=hclust.ward,scale="none")
 }
 
-####generating PCA scatterplot
-# logscData: simulated data after log scaling and standardization
+#' Generating PCA Scatterplot
+#' @param logscData: simulated data after log scaling and standardization
+#' @export
 gen_pca_plot <- function(logscData){
   pca_results <- prcomp(logscData, center = TRUE, scale = TRUE)
   var_explained <- pca_results$sdev^2/sum(pca_results$sdev^2)
@@ -70,11 +75,12 @@ gen_pca_plot <- function(logscData){
        ylab = paste0("PC2: ",round(var_explained[2]*100,1),"%"))
 }
 
-####MODEL CLUSTERING BY K-MEANS
-# data: data matrix for k-means clustering (either logscData or projected data)
-# numbClust: number of model clusters
-# clustCenters: coordinates of the cluster center
-# res (output): model clustering output
+#' MODEL CLUSTERING BY K-MEANS
+#' @param data: data matrix for k-means clustering (either logscData or projected data)
+#' @param numbClust: number of model clusters
+#' @param clustCenters: coordinates of the cluster center
+#' @return res: model clustering output
+#' @export
 modClustKmeans<-function(data,numbClust, clustCenters)
 {
   
@@ -95,10 +101,11 @@ modClustKmeans<-function(data,numbClust, clustCenters)
   return(res)
 }
 
-####GENE CLUSTERING BY INDIVIDUAL MODELS (HCA)
-# logscData: simulated data after log scaling and standardization
-# numbGeneClust: number of gene clusters
-# gene_list (output): gene clustering output
+#' GENE CLUSTERING BY INDIVIDUAL MODELS (HCA)
+#' @param logscData: simulated data after log scaling and standardization
+#' @param numbGeneClust: number of gene clusters
+#' @return gene_list: gene clustering output
+#' @export
 geneClustInd<-function(logscData,numbGeneClust)
 {
   hr<-hclust(as.dist(1-cor(logscData, method="pearson")), method="ward.D2")
@@ -114,11 +121,12 @@ geneClustInd<-function(logscData,numbGeneClust)
   return(gene_list)
 }
 
-####GENE CLUSTERING BY MEDIAN VALUES
-# clustData: model clustering data 
-# clSize: size of each model clusters (an output of the model clustering results)
-# numbGeneClust: number of gene clusters
-# gene_list (output): gene clustering output
+#' GENE CLUSTERING BY MEDIAN VALUES
+#' @param clustData: model clustering data 
+#' @param clSize: size of each model clusters (an output of the model clustering results)
+#' @param numbGeneClust: number of gene clusters
+#' @return gene_list: gene clustering output
+#' @export
 geneClustMedian<-function(clustData,clSize, numbGeneClust)
 {
   
@@ -143,12 +151,12 @@ geneClustMedian<-function(clustData,clSize, numbGeneClust)
   return(gene_list)
 }
 
-####Reordering the gene clusters in the gene expression matrix
-# logscData: current gene expression data matrix
-# gene_list: gene clustering output
-# geneGroupOrder: desired order of gene groups
-# (output) : a list of reordered data (logscData) and an updated gene list (gene_list)
-
+#' Reordering the gene clusters in the gene expression matrix
+#' @param logscData: current gene expression data matrix
+#' @param gene_list: gene clustering output
+#' @param geneGroupOrder: desired order of gene groups
+#' @return a list of reordered data (logscData) and an updated gene list (gene_list)
+#' @export
 reordering<-function(logscData, gene_list, geneGroupOrder = NULL) {
   shufCol<-NULL
   numbGeneClust = length(gene_list)
@@ -175,11 +183,12 @@ reordering<-function(logscData, gene_list, geneGroupOrder = NULL) {
   return(list(data = logscData[,permCol], gene_list = gene_list_new))
 }
 
-#### Identify the center and radius of each model cluster
-# data: gene expression matrix
-# clusterRef: cluster indices of all models 
-# percThr: Threshold of permutation test 
-# (output) : a list of (center, variance, radius(centroid & medoid)) for each cluster
+#' Identify the center and radius of each model cluster
+#' @param data: gene expression matrix
+#' @param clusterRef: cluster indices of all models 
+#' @param percThr: Threshold of permutation test 
+#' @return : a list of (center, variance, radius(centroid & medoid)) for each cluster
+#' @export
 centMedVarCutDistPerc<-function(data, clusterRef, percThr=0.01)
 {
   dataRow = t(as.matrix(data))

@@ -1,25 +1,26 @@
-#### Circuit optimization (combined MH, MA & TE)
-#network_top: topology of the full network
-# data: processed gene expression matrix
-# clusterRef: cluster indices of all models
-# cenMedRef: cluster centers
-# cutOffM: cluster radii
-# gene_list: gene clustering output 
-# inTopsM: a list of all initial circuit topologies
-# output: a string of file prefix for saving results ("Results")
-# nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
-#          A new circuit is simulated by RACIPE nRepeat times for robust score evaluations; 
-#          The scores will then be saved and used in future iterations, when the circuits are sampled again.
-# nIter: number of iterations for each simulation 
-# modelsCGr: number of RACIPE models to be simulated (10000)
-# numbThr: number of HPC threads
-# nSim: number of simultaneous simulations 
-# (output): (in results files)
+#' Circuit optimization (combined MH, MA & TE)
+#' @param network_top: topology of the full network
+#' @param data: processed gene expression matrix
+#' @param clusterRef: cluster indices of all models
+#' @param cenMedRef: cluster centers
+#' @param cutOffM: cluster radii
+#' @param gene_list: gene clustering output 
+#' @param inTopsM: a list of all initial circuit topologies
+#' @param output: a string of file prefix for saving results ("Results")
+#' @param nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
+#'         A new circuit is simulated by RACIPE nRepeat times for robust score evaluations; 
+#'         The scores will then be saved and used in future iterations, when the circuits are sampled again.
+#' @param nIter: number of iterations for each simulation 
+#' @param modelsCGr: number of RACIPE models to be simulated (10000)
+#' @param numbThr: number of HPC threads
+#' @param nSim: number of simultaneous simulations 
+#' @return (in results files)
+#' @export
+#' @import doParallel
 opt_combined <- function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM,
                          output = "Results", nRepeat= 5, nIter = 1400, modelsCGr = 10000, 
                          numbThr = 40, nSim = 20){
-  require(doParallel)
-
+#  require(doParallel)
   dataRow = t(data)
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")
   fileOutStuff<-paste0(output,"_Stuff.txt")

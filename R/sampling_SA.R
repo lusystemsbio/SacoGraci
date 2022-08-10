@@ -1,26 +1,28 @@
-#### Circuit optimization with Simulated Annealing (SA) algorithm
-# network_top: topology of the full network
-# data: processed gene expression matrix
-# clusterRef: cluster indices of all models
-# cenMedRef: cluster centers
-# cutOffM: cluster radii
-# gene_list: gene clustering output 
-# init_top: initial circuit topology
-# output: a string of file prefix for saving results ("Results")
-# nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
-#          A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
-#          The scores will then be saved and used in future iterations, when the circuits are sampled again.
-# modelsCGr: number of RACIPE models to be simulated (10000)
-# maxT: maximum/initial temperature in SA (150)
-# threshT: a second temperature in SA, below which SA has a slower temperature decaying rate (40)
-# decayRate1: 1st temperature decaying rate (geometrically decaying) (0.8)
-# decayRate2: 2nd temperature decaying rate (0.6), until temperature = 1 (current implementation)
-# iter_per_temp: number of iterations for each fixed temperature (100)
-# df (output): topology of the optimized CG circuit
+#' Circuit optimization with Simulated Annealing (SA) algorithm
+#' @param network_top: topology of the full network
+#' @param data: processed gene expression matrix
+#' @param clusterRef: cluster indices of all models
+#' @param cenMedRef: cluster centers
+#' @param cutOffM: cluster radii
+#' @param gene_list: gene clustering output 
+#' @param init_top: initial circuit topology
+#' @param output: a string of file prefix for saving results ("Results")
+#' @param nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
+#'         A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
+#'         The scores will then be saved and used in future iterations, when the circuits are sampled again.
+#' @param modelsCGr: number of RACIPE models to be simulated (10000)
+#' @param maxT: maximum/initial temperature in SA (150)
+#' @param threshT: a second temperature in SA, below which SA has a slower temperature decaying rate (40)
+#' @param decayRate1: 1st temperature decaying rate (geometrically decaying) (0.8)
+#' @param decayRate2: 2nd temperature decaying rate (0.6), until temperature = 1 (current implementation)
+#' @param iter_per_temp: number of iterations for each fixed temperature (100)
+#' @return df: topology of the optimized CG circuit
+#' @export
+#' @import doParallel
 opt_SA <-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, init_top, 
                  output = "Results", nRepeat= 5, modelsCGr = 10000, 
                  maxT=150, decayRate1=0.8, decayRate2=0.6, threshT=40,iter_per_temp=100){
-
+#  require(doParallel)
   dataRow = t(data)
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")
   fileAcc<-paste0(output,"_acc.txt")

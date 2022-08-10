@@ -1,16 +1,19 @@
-#### Circuit scoring 
-# dataRow: gene expression matrix with gene in rows
-# clusterRef: the cluster indices of all models
-# cenMedRef: cluster centers
-# cutOffM: cluster radii
-# gene_list: gene clustering output 
-# inNodes: a list of input nodes
-# topol_cgr: the current CG circuit topology
-# modelsCGr: the number of RACIPE models to be simulated (10000)
-# scoresOuts (output): 1: the total score, 2: the number of noisy models
+#' Circuit scoring 
+#' @param dataRow: gene expression matrix with gene in rows
+#' @param clusterRef: the cluster indices of all models
+#' @param cenMedRef: cluster centers
+#' @param cutOffM: cluster radii
+#' @param gene_list: gene clustering output 
+#' @param inNodes: a list of input nodes
+#' @param topol_cgr: the current CG circuit topology
+#' @param modelsCGr: the number of RACIPE models to be simulated (10000)
+#' @return scoresOuts: 1: the total score, 2: the number of noisy models
+#' @export
+#' @import sRACIPE
+#' @import SummarizedExperiment
 inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_list, inNodes, topol_cgr, modelsCGr = 10000)
 {
-  require(sRACIPE)
+#  require(sRACIPE)
   #topol_cgr<-newt_top
   #dataRow doesn't include expression(noise) of input genes 
   #topol_cgr<-lastTop
