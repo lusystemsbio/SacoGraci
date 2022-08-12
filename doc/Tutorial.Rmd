@@ -110,6 +110,7 @@ circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clus
 ```
 
 The topology of the optimized CGC can be visualized with "plot_network" 
+
 ```
 plot_network(circuit1)
 ```
