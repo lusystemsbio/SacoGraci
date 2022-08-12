@@ -91,7 +91,7 @@ stat_clusters <-centMedVarCutDistPerc(data = data_processed, clusterRef = cluste
 
 # Generate initial starting CG circuits
 
-To start the circuit optimization process, we start with generating some initial gene circuits based on the topology of the full network and the gene grouping scheme. "numbNewTop" specifies the number of initial circuits to be generated. 
+To start the circuit optimization process, we start with generating some initial gene circuits based on the topology of the full network and the gene grouping scheme. "numbNewTop" specifies the number of initial circuits to be generated. In the tutorial, 90 initial circuits are generated. That many initial circuits are sometimes needed for Temperature Tempering when additional replicas need to be added for efficient swapping. 
 
 ```{r}
 inTopsM <-gaInitial_gen(circuit_top = top_ex, gene_list = gene_list, numbNewTop = 90)
