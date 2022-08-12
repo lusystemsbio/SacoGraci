@@ -6,6 +6,7 @@
 #' @return logscData: simulated data after log scaling and standardization
 #' @export
 #' @import sRACIPE
+#' @import SummarizedExperiment
 gen_RACIPE <-function(dftop, nModels, integrateStepSize = 0.02, simulationTime = 200)
 {
 #  require(sRACIPE)

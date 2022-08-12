@@ -15,7 +15,7 @@
 #' @param temp_Array: temperatures for all replicas
 #'        Default: a total of 24 replicas with temperatures:
 #'        c(1,1.05,1.1,1.15,1.2,1.25,1.3,1.5,2.0,2.5,3.0,3.5,4.0,6,9,11,13,20,28,40,55,70,90,120)
-#' @param iter_temp_add: the number of iterations (proposed swaps) during the temperature addition process
+#' @param iter_temp_add: the number of iterations (proposed swaps per replica) during the temperature addition process
 #'        Default: three runs of the procedure; (c(50,100,150)) 
 #' @param numb_iter_extra: number of extra iterations after the temperature addition process (1100)
 #' @param logAlpha: log of the target swap rate (log(0.4))
@@ -163,7 +163,7 @@ opt_TE<-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, i
   ######START THE ITERATIONS
   #FOR ADDING TEMPERATURES
   
-  for(itAdd in 2:length(iter_temp_add)){
+  for(itAdd in 1:length(iter_temp_add)){
     #itAdd<-1
     
     logSwapA<-rep(0,nChains-1)
@@ -602,6 +602,24 @@ opt_TE<-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, i
   
   #############################################
   #######DO THE LAST RUN
+  
+  logSwapA<-rep(0,nChains-1)
+  numbSwapsA<-rep(0,nChains+2)
+  diffA<-rep(0,nChains)
+  errAcc<-rep(0,2*nChains+1)
+  
+  accRate<-rep(0,nChains)
+  nUp<-accRate
+  nDown<-nUp
+  upDown<-nUp
+  permArray<-1:nChains
+  
+  nUp[1]<-1
+  nDown[nChains]<-1
+  upDown[1]<-1
+  upDown[nChains]<--1
+  
+  swEven<-seq(from=nChains-1, to=1, by=-1)
   
   for(itn in 1:numb_iter_extra){
     #update the topologies of each chain

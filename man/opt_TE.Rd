@@ -52,7 +52,7 @@ The scores will then be saved and used in future iterations, when the circuits a
 Default: a total of 24 replicas with temperatures:
 c(1,1.05,1.1,1.15,1.2,1.25,1.3,1.5,2.0,2.5,3.0,3.5,4.0,6,9,11,13,20,28,40,55,70,90,120)}
 
-\item{iter_temp_add:}{the number of iterations (proposed swaps) during the temperature addition process
+\item{iter_temp_add:}{the number of iterations (proposed swaps per replica) during the temperature addition process
 Default: three runs of the procedure; (c(50,100,150))}
 
 \item{numb_iter_extra:}{number of extra iterations after the temperature addition process (1100)}
