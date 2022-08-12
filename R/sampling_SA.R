@@ -18,11 +18,9 @@
 #' @param iter_per_temp: number of iterations for each fixed temperature (100)
 #' @return df: topology of the optimized CG circuit
 #' @export
-#' @import doParallel
 opt_SA <-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, init_top, 
                  output = "Results", nRepeat= 5, modelsCGr = 10000, 
                  maxT=150, decayRate1=0.8, decayRate2=0.6, threshT=40,iter_per_temp=100){
-#  require(doParallel)
   dataRow = t(data)
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")
   fileAcc<-paste0(output,"_acc.txt")
@@ -58,8 +56,7 @@ opt_SA <-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, 
   while(current_temp>1){
     if (current_temp>threshT){
       decay_rate<-decayRate1
-    }
-    if (current_temp<=threshT){
+    }else{
       decay_rate<-decayRate2
     }
 

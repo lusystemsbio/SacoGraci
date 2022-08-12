@@ -30,8 +30,8 @@ inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_lis
   
   #SIMULATE CGR-CIRCUIT
   #set.seed(42)
-  racCGR<-sracipeSimulate(circuit = df_lastTop, numModels = modelsCGr, plots = FALSE, 
-                          integrateStepSize = 0.02, simulationTime = 100)
+  racCGR<-suppressMessages(sracipeSimulate(circuit = df_lastTop, numModels = modelsCGr, plots = FALSE, 
+                          integrateStepSize = 0.02, simulationTime = 100))
   
   
   dataRowGenePert<-assay(racCGR,1)#This is our  data 

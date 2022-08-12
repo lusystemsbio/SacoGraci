@@ -69,6 +69,7 @@ gene_list = output_processed$gene_list
 ```
 
 Users can also provide their own grouping schemes, as illustrated in the following example.
+
 ```
 # show how to generate model_list and gene_list manually
 clusterRef =  c(rep(1, 587), ref(2,398), ref(3,15))
@@ -100,7 +101,7 @@ inTopsM <-gaInitial_gen(circuit_top = top_ex, gene_list = gene_list, numbNewTop 
 
 SacoGraci_optimization is the main function for circuit optimization. Due to high computational cost, we recommend to use high performance computing resources. We recommend to use (nRepeat= 5, nIter = 1400, modelsCGr = 10000) for a robust circuit optimization. But in the illustration, we chose the following parameters to only to generate quick results. The temperature ("temM") is set to be 60 in this example. 
  
-```{r, message=FALSE}
+```{r, results='hide'}
 circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
                   cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
                   gene_list = gene_list, init_top = inTopsM[1,], 
@@ -114,7 +115,9 @@ plot_network(circuit1)
 ```
 <center> ![](cgc_ex.png){width=30%} </center>
 
-One can choose to use other sampling algorithms, such as simulated annealing (SA). 
+One can choose to use other sampling algorithms.
+
+* Simulated annealing (SA): (check *?opt_SA* for recommended parameters)
 
 ```
 circuit2 = opt_SA(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
@@ -124,6 +127,42 @@ circuit2 = opt_SA(network_top = top_ex, data = data_processed, clusterRef = clus
                   maxT=150, threshT=40, decayRate1=0.8, decayRate2=0.6, iter_per_temp=2)
 plot_network(circuit2)
 ```
+
+* MH with multiple threads: (check *?opt_MH_multi* for recommended parameters)
+
+```
+circuit3 = opt_MH_multi(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
+                  cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
+                  gene_list = gene_list, inTopsM = inTopsM, 
+                  output = "Results3", nRepeat= 1, nIter = 10, modelsCGr = 100, 
+                  tempM = 60, numbThr = 2, nSim = 2)
+plot_network(circuit3)
+```
+
+* SA with multiple threads: (check *?opt_MA_multi* for recommended parameters)
+
+```
+circuit4 = opt_SA_multi(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
+                  cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
+                  gene_list = gene_list, inTopsM = inTopsM, 
+                  output = "Results4", nRepeat= 1, modelsCGr = 100, 
+                  maxT=150, threshT=40, decayRate1=0.8, decayRate2=0.6, iter_per_temp=2,
+                  numbThr = 2, nSim = 2)
+plot_network(circuit4)
+```
+
+* TE with multiple threads: (check *?opt_TE* for recommended parameters)
+
+```
+circuit5 = opt_TE(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
+                  cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
+                  gene_list = gene_list, inTopsM = inTopsM, 
+                  output = "Results5", nRepeat= 1, modelsCGr = 100, 
+                  numbThr = 4, temp_Array=c(1,10,50,100), iter_temp_add=c(2,2,2), 
+                  numb_iter_extra = 4, logAlpha = log(0.4))
+plot_network(circuit5)
+```
+
 # References
 
 Caranica & Lu (2022) A Data-Driven Optimization Method for Coarse-Graining Gene Regulatory Networks, bioRxiv xxx; doi: https://doi.org/xxx

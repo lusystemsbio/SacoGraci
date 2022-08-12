@@ -31,7 +31,7 @@ stat_clusters <-centMedVarCutDistPerc(data = data_processed, clusterRef = cluste
 ## -----------------------------------------------------------------------------
 inTopsM <-gaInitial_gen(circuit_top = top_ex, gene_list = gene_list, numbNewTop = 90)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ---- results='hide'----------------------------------------------------------
 circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
                   cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
                   gene_list = gene_list, init_top = inTopsM[1,], 

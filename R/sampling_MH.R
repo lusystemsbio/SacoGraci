@@ -15,11 +15,9 @@
 #' @param tempM: temperature for MH (60)
 #' @return df: topology of the optimized CG circuit
 #' @export
-#' @import doParallel
 opt_MH <-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, init_top, 
                   output = "Results", nRepeat= 5, nIter = 1400, modelsCGr = 10000, 
                   tempM=60){
-#  require(doParallel)
   dataRow = t(data)
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")
   fileAcc<-paste0(output,"_acc.txt")
