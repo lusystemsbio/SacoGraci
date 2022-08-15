@@ -7,7 +7,7 @@ set.seed(43)
 top_ex = read.csv("ex4_net.csv", header=T)
 
 ## -----------------------------------------------------------------------------
-data_exp = readRDS("exp_data_RACIPE_ex.RDS")
+data_exp = readRDS("exp_data_RACIPE_ex4.RDS")
 
 ## -----------------------------------------------------------------------------
 gen_heatmap_hca(logscData = data_exp)  # heatmap visualization

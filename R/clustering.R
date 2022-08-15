@@ -10,9 +10,8 @@
 gen_RACIPE <-function(dftop, nModels, integrateStepSize = 0.02, simulationTime = 200)
 {
 #  require(sRACIPE)
-  rac2agCore<-sRACIPE::sracipeSimulate(circuit = dftop, numModels = nModels, plots = FALSE, 
-                              integrateStepSize, simulationTime)
-  
+  rac2agCore<-sracipeSimulate(circuit = dftop, numModels = nModels, plots = FALSE, 
+                              integrateStepSize = integrateStepSize, simulationTime = simulationTime)
   
   dataRowGene<-assay(rac2agCore,1)
   dataColGene<-t(as.matrix(dataRowGene))

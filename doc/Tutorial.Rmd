@@ -44,7 +44,7 @@ data_exp = gen_RACIPE(top_ex, 1000)
 ```
 
 ```{r}
-data_exp = readRDS("exp_data_RACIPE_ex.RDS")
+data_exp = readRDS("exp_data_RACIPE_ex4.RDS")
 ```
 
 # Group models and genes

@@ -24,9 +24,7 @@ inNWsimilarityRefCGr<-function(dataRow, clusterRef, cenMedRef, cutOffM, gene_lis
   numbClusterRef<-length(unique(clusterRef))#it doesn't include input nodes
   scoresOut<-rep(0,4)
   
-  
   df_lastTop<-convAdjTop(topol_cgr, numbCGRn, 1:numbCGRn)
-  
   
   #SIMULATE CGR-CIRCUIT
   #set.seed(42)
