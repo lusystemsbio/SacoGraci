@@ -1,20 +1,16 @@
 ###EX4 DATA (SCLC network)
 
 library(SacoGraci)
-library(sRACIPE)
-library(SummarizedExperiment)
 set.seed(43)
 
-top_ex = read.csv("ex4_net.csv", header=T)
-data_exp = gen_RACIPE(dftop = top_ex, nModels = 500)
+top_ex4 = read.csv("ex4_net.csv", header=T)
+### use this for testing: racEx4 = gen_RACIPE(top_ex4, 100)
+racEx4 = gen_RACIPE(dftop = top_ex4, nModels = 10000)
 
-data_exp <-sracipeSimulate(circuit = top_ex, numModels = 5, plots = FALSE)
-dataRowGene<-assay(data_exp,1)
+gen_heatmap_hca(logscData = racEx4)  # heatmap visualization
+gen_pca_plot(logscData = racEx4)  # pca visualization
 
-gen_heatmap_hca(logscData = data_exp)  # heatmap visualization
-gen_pca_plot(logscData = data_exp)  # pca visualization
-
-output_model_grouping = modClustHCA(logscData = data_exp,numbClust = 3)  # model clustering with HCA, we specify 3 clusters
+output_model_grouping = modClustHCA(logscData = racEx4,numbClust = 3)  # model clustering with HCA, we specify 3 clusters
 data_reordered = output_model_grouping$dataRearr  # reordered gene expression data by the clustering outcome
 clusterRef = output_model_grouping$clInd  # cluster indices of all models
 
@@ -26,12 +22,12 @@ output_processed = reordering(logscData = data_reordered, gene_list = output_gen
 data_processed = output_processed$data
 gene_list = output_processed$gene_list
 
-stat_clusters <-centMedVarCutDistPerc(data = data_processed, clusterRef = clusterRef, percThr = 0.01)
+stat_clusters = centMedVarCutDistPerc(data = data_processed, clusterRef = clusterRef, percThr = 0.01)
 
-inTopsM <-gaInitial_gen(circuit_top = top_ex, gene_list = gene_list, numbNewTop = 90)
+inTopsM = gaInitial_gen(circuit_top = top_ex4, gene_list = gene_list, numbNewTop = 90)
 
 # example code for circuit optimization
-circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
+circuit1 = opt_MH(network_top = top_ex4, data = data_processed, clusterRef = clusterRef, 
                   cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
                   gene_list = gene_list, init_top = inTopsM[1,], 
                   output = "Results1", nRepeat= 1, nIter = 10, modelsCGr = 100, 

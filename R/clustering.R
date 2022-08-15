@@ -85,7 +85,7 @@ modClustKmeans<-function(data, numbClust, clustCenters)
 {
   
   clSize<-rep(0,numbClust)
-  permModels<-rep(0,dim(pcData)[2])
+  permModels<-rep(0,dim(data)[2])
   kCent<-kmeans(data, centers=clustCenters,iter.max=10000,nstart=1)
   for(t in 1:numbClust)
   {
