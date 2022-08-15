@@ -28,7 +28,7 @@ First, the topology of the GRN is loaded. The topology file "Ex_topology.csv" is
 ```{r}
 library(SacoGraci)
 set.seed(43)
-top_ex = read.csv("Ex_topology.csv", header=T)
+top_ex = read.csv("ex4_net.csv", header=T)
 ```
 
 The network topology can be visualized with function "plot_network" 
@@ -166,7 +166,7 @@ plot_network(circuit5)
 
 # References
 
-Caranica & Lu (2022) A Data-Driven Optimization Method for Coarse-Graining Gene Regulatory Networks, bioRxiv xxx; doi: https://doi.org/xxx
+Caranica C & Lu M. A Data-Driven Optimization Method for Coarse-Graining Gene Regulatory Networks. bioRxiv 2022.08.10.503498; doi: https://doi.org/10.1101/2022.08.10.503498
 
 # Session Information
 

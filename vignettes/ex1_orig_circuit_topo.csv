@@ -1,0 +1,11 @@
+Source,Target,Type
+A,B,1
+B,C,1
+D,E,1
+E,F,1
+A,F,2
+F,A,2
+B,E,2
+E,B,2
+C,D,2
+D,E,2

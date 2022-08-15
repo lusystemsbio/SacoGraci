@@ -1,15 +1,16 @@
-## ----setup, include=FALSE-----------------------------------------------------
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 7, fig.height = 6, fig.align = "center")
+###EX4 DATA (SCLC network)
 
-## -----------------------------------------------------------------------------
 library(SacoGraci)
+library(sRACIPE)
+library(SummarizedExperiment)
 set.seed(43)
+
 top_ex = read.csv("ex4_net.csv", header=T)
+data_exp = gen_RACIPE(dftop = top_ex, nModels = 500)
 
-## -----------------------------------------------------------------------------
-data_exp = readRDS("exp_data_RACIPE_ex.RDS")
+data_exp <-sracipeSimulate(circuit = top_ex, numModels = 5, plots = FALSE)
+dataRowGene<-assay(data_exp,1)
 
-## -----------------------------------------------------------------------------
 gen_heatmap_hca(logscData = data_exp)  # heatmap visualization
 gen_pca_plot(logscData = data_exp)  # pca visualization
 
@@ -25,19 +26,14 @@ output_processed = reordering(logscData = data_reordered, gene_list = output_gen
 data_processed = output_processed$data
 gene_list = output_processed$gene_list
 
-## -----------------------------------------------------------------------------
 stat_clusters <-centMedVarCutDistPerc(data = data_processed, clusterRef = clusterRef, percThr = 0.01)
 
-## -----------------------------------------------------------------------------
 inTopsM <-gaInitial_gen(circuit_top = top_ex, gene_list = gene_list, numbNewTop = 90)
 
-## ---- results='hide'----------------------------------------------------------
+# example code for circuit optimization
 circuit1 = opt_MH(network_top = top_ex, data = data_processed, clusterRef = clusterRef, 
                   cenMedRef = stat_clusters$center, cutOffM = stat_clusters$radius, 
                   gene_list = gene_list, init_top = inTopsM[1,], 
                   output = "Results1", nRepeat= 1, nIter = 10, modelsCGr = 100, 
                   tempM = 60)
-
-## -----------------------------------------------------------------------------
-sessionInfo()
 

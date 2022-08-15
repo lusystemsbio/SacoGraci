@@ -9,5 +9,5 @@ License: MIT License
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-Imports: sRACIPE, igraph, doParallel, visNetwork, SummarizedExperiment, foreach, parallel
+Imports: sRACIPE, igraph, doParallel, visNetwork, SummarizedExperiment, foreach, parallel, utils
 RoxygenNote: 7.1.2

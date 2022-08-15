@@ -10,7 +10,7 @@
 gen_RACIPE <-function(dftop, nModels, integrateStepSize = 0.02, simulationTime = 200)
 {
 #  require(sRACIPE)
-  rac2agCore<-sracipeSimulate(circuit = dftop, numModels = nModels, plots = FALSE, 
+  rac2agCore<-sRACIPE::sracipeSimulate(circuit = dftop, numModels = nModels, plots = FALSE, 
                               integrateStepSize, simulationTime)
   
   
@@ -82,22 +82,24 @@ gen_pca_plot <- function(logscData){
 #' @param clustCenters: coordinates of the cluster center
 #' @return res: model clustering output
 #' @export
-modClustKmeans<-function(data,numbClust, clustCenters)
+modClustKmeans<-function(data, numbClust, clustCenters)
 {
   
   clSize<-rep(0,numbClust)
-  dataRearr<-NULL
+  permModels<-rep(0,dim(pcData)[2])
   kCent<-kmeans(data, centers=clustCenters,iter.max=10000,nstart=1)
   for(t in 1:numbClust)
   {
     inI<-which(kCent$cluster==t)
     clSize[t]<-length(inI)
-    dataRearr<-rbind(dataRearr,data[inI,])
+    permModels<-c(permModels,inI)
   }
   
-  res<-list()
-  res[[1]]<-clSize
-  res[[2]]<-dataRearr
+  cluster_ind = integer()
+  for(i in 1: length(clSize)){
+    cluster_ind = c(cluster_ind, rep(i, clSize[i]))
+  }
+  res<-list(clSize = clSize, permM = permModels, clInd = cluster_ind)
   
   return(res)
 }
@@ -141,7 +143,7 @@ geneClustMedian<-function(clustData,clSize, numbGeneClust)
   }
   hr<-hclust(as.dist(1-cor(medM, method="pearson")), method="ward.D2")
   myCl<-cutree(hr,k=numbGeneClust)
-  geneNames<-colnames(data)
+  geneNames<-colnames(clustData)
   
   gene_list<-list()
   for (i in 1:numbGeneClust)
