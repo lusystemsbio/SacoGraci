@@ -29,6 +29,8 @@ opt_SA_multi<-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_l
                        output = "Results", nRepeat= 5, modelsCGr = 10000,  
                        maxT=150, decayRate1=0.8, decayRate2=0.6, threshT=40, iter_per_temp=100,
                        numbThr = 40, nSim = 20){
+  
+  j = 0
   dataRow = t(data)
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")
   fileOutStuff<-paste0(output,"_Stuff.txt")

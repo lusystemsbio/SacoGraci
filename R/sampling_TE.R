@@ -32,6 +32,7 @@ opt_TE<-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, i
                                             3.5,4.0,6,9,11,13,20,28,40,55,70,90,120), 
                  iter_temp_add=c(50,100,150), numb_iter_extra=1100, logAlpha=log(0.4)){
   
+  j = 0
   dataRow = t(data)
   fileOutTop<-paste0(output, "_tops.txt")
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")

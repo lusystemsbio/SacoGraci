@@ -25,6 +25,8 @@
 opt_MH_multi <-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM, 
                         output = "Results", nRepeat= 5, nIter = 1400, modelsCGr = 10000, 
                         tempM = 60, numbThr = 40, nSim = 20){
+  
+  j = 0
   dataRow = t(data)
   fileAllSamp<-paste0(output, "_tops_allSampled.txt")
   fileOutStuff<-paste0(output,"_Stuff.txt")
