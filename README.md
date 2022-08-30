@@ -26,7 +26,7 @@ https://htmlpreview.github.io/?https://github.com/lusystemsbio/SacoGraci/blob/ma
 
 ### Manual:
 
-https://github.com/lusystemsbio/SacoGraci/blob/main/SacoGraci_1.0.pdf
+https://github.com/lusystemsbio/SacoGraci/blob/main/vignettes/SacoGraci_1.0.pdf
 
 ### Reference:
 
