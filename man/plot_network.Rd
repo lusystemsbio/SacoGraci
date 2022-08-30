@@ -7,9 +7,9 @@
 plot_network(tf_links, height = "300px")
 }
 \arguments{
-\item{tf_links:}{circuit topology}
+\item{tf_links}{circuit topology}
 
-\item{height:}{plot height ("300px")}
+\item{height}{plot height ("300px")}
 }
 \value{
 network plot

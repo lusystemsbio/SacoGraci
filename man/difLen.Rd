@@ -7,9 +7,9 @@
 difLen(samp_top, ref_top)
 }
 \arguments{
-\item{sam_top:}{Adjacency matrix of the sampled circuit topology}
+\item{samp_top}{Adjacency matrix of the sampled circuit topology}
 
-\item{ref_top:}{Adjacency matrix of the reference circuit topology}
+\item{ref_top}{Adjacency matrix of the reference circuit topology}
 }
 \value{
 : number of mismatching edges

@@ -7,9 +7,9 @@
 initialize_topology(adj_matrProb, numb_cgnodes)
 }
 \arguments{
-\item{adj_matrProb:}{adjacency matrix with probabilities}
+\item{adj_matrProb}{adjacency matrix with probabilities}
 
-\item{numb_cgnodes:}{the number of CG nodes}
+\item{numb_cgnodes}{the number of CG nodes}
 }
 \value{
 adj_Matr:  the adj. matrix of the most dense topology as a vector

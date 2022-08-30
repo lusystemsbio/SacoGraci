@@ -7,7 +7,7 @@
 gen_pca_plot(logscData)
 }
 \arguments{
-\item{logscData:}{simulated data after log scaling and standardization}
+\item{logscData}{simulated data after log scaling and standardization}
 }
 \description{
 Generating PCA Scatterplot

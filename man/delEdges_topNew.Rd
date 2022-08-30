@@ -7,17 +7,17 @@
 delEdges_topNew(samp_top, numb_genes, numb_del, pos_del, inNodes, list_top)
 }
 \arguments{
-\item{samp_top:}{the current circuit topology}
+\item{samp_top}{the current circuit topology}
 
-\item{numb_genes:}{number of genes of the circuit}
+\item{numb_genes}{number of genes of the circuit}
 
-\item{numb_del:}{number of edges to be deleted}
+\item{numb_del}{number of edges to be deleted}
 
-\item{pos_del:}{indices of edges that can be deleted}
+\item{pos_del}{indices of edges that can be deleted}
 
-\item{inNodes:}{a list of input nodes, output from the function find_inout}
+\item{inNodes}{a list of input nodes, output from the function find_inout}
 
-\item{list_top:}{list of sampled circuit topologies, we make sure they are not sampled again}
+\item{list_top}{list of sampled circuit topologies, we make sure they are not sampled again}
 }
 \value{
 adj_fin: the modified circuit topology

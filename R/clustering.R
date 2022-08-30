@@ -1,8 +1,8 @@
 #' RACIPE simulations
-#' @param dftop: circuit topology
-#' @param nModels: number of RACIPE models generated
-#' @param integrateStepSize: step size for the ODE integration
-#' @param simulationTime: simulation time of ODE for each RACIPE model
+#' @param dftop circuit topology
+#' @param nModels number of RACIPE models generated
+#' @param integrateStepSize step size for the ODE integration
+#' @param simulationTime simulation time of ODE for each RACIPE model
 #' @return logscData: simulated data after log scaling and standardization
 #' @export
 #' @import sRACIPE
@@ -23,10 +23,11 @@ gen_RACIPE <-function(dftop, nModels, integrateStepSize = 0.02, simulationTime =
 }
 
 #' Model Clustering By hierarchical clustering analysis (HCA)
-#' @param logscData: simulated data after log scaling and standardization
-#' @param numbClust: number of model clusters
+#' @param logscData simulated data after log scaling and standardization
+#' @param numbClust number of model clusters
 #' @return res: model clustering output: (1: cluster sizes; 2: clustering rearranged data; 3: cluster indices)
 #' @export
+#' @importFrom stats as.dist cor cutree
 modClustHCA<-function(logscData,numbClust)
 {
 
@@ -55,8 +56,10 @@ modClustHCA<-function(logscData,numbClust)
 }
 
 #' Generating HCA Heatmap 
-#' @param logscData: simulated data after log scaling and standardization
+#' @param logscData simulated data after log scaling and standardization
 #' @export
+#' @importFrom graphics plot
+#' @importFrom stats as.dist cor hclust heatmap
 gen_heatmap_hca <- function(logscData){
   dist.pear = function(x) as.dist(1-cor(t(x)))
   hclust.ward = function(x) hclust(x, method="ward.D2")
@@ -65,8 +68,10 @@ gen_heatmap_hca <- function(logscData){
 }
 
 #' Generating PCA Scatterplot
-#' @param logscData: simulated data after log scaling and standardization
+#' @param logscData simulated data after log scaling and standardization
 #' @export
+#' @importFrom stats prcomp
+#' @importFrom graphics plot
 gen_pca_plot <- function(logscData){
   pca_results <- prcomp(logscData, center = TRUE, scale = TRUE)
   var_explained <- pca_results$sdev^2/sum(pca_results$sdev^2)
@@ -76,11 +81,12 @@ gen_pca_plot <- function(logscData){
 }
 
 #' MODEL CLUSTERING BY K-MEANS
-#' @param data: data matrix for k-means clustering (either logscData or projected data)
-#' @param numbClust: number of model clusters
-#' @param clustCenters: coordinates of the cluster center
+#' @param data data matrix for k-means clustering (either logscData or projected data)
+#' @param numbClust number of model clusters
+#' @param clustCenters coordinates of the cluster center
 #' @return res: model clustering output
 #' @export
+#' @importFrom stats kmeans
 modClustKmeans<-function(data, numbClust, clustCenters)
 {
   
@@ -104,10 +110,11 @@ modClustKmeans<-function(data, numbClust, clustCenters)
 }
 
 #' GENE CLUSTERING BY INDIVIDUAL MODELS (HCA)
-#' @param logscData: simulated data after log scaling and standardization
-#' @param numbGeneClust: number of gene clusters
+#' @param logscData simulated data after log scaling and standardization
+#' @param numbGeneClust number of gene clusters
 #' @return gene_list: gene clustering output
 #' @export
+#' @importFrom stats as.dist cor cutree
 geneClustInd<-function(logscData,numbGeneClust)
 {
   hr<-hclust(as.dist(1-cor(logscData, method="pearson")), method="ward.D2")
@@ -124,11 +131,12 @@ geneClustInd<-function(logscData,numbGeneClust)
 }
 
 #' GENE CLUSTERING BY MEDIAN VALUES
-#' @param clustData: model clustering data 
-#' @param clSize: size of each model clusters (an output of the model clustering results)
-#' @param numbGeneClust: number of gene clusters
+#' @param clustData model clustering data 
+#' @param clSize size of each model clusters (an output of the model clustering results)
+#' @param numbGeneClust number of gene clusters
 #' @return gene_list: gene clustering output
 #' @export
+#' @importFrom stats as.dist cor cutree
 geneClustMedian<-function(clustData,clSize, numbGeneClust)
 {
   
@@ -154,9 +162,9 @@ geneClustMedian<-function(clustData,clSize, numbGeneClust)
 }
 
 #' Reordering the gene clusters in the gene expression matrix
-#' @param logscData: current gene expression data matrix
-#' @param gene_list: gene clustering output
-#' @param geneGroupOrder: desired order of gene groups
+#' @param logscData current gene expression data matrix
+#' @param gene_list gene clustering output
+#' @param geneGroupOrder desired order of gene groups
 #' @return a list of reordered data (logscData) and an updated gene list (gene_list)
 #' @export
 reordering<-function(logscData, gene_list, geneGroupOrder = NULL) {
@@ -186,11 +194,12 @@ reordering<-function(logscData, gene_list, geneGroupOrder = NULL) {
 }
 
 #' Identify the center and radius of each model cluster
-#' @param data: gene expression matrix
-#' @param clusterRef: cluster indices of all models 
-#' @param percThr: Threshold of permutation test 
+#' @param data gene expression matrix
+#' @param clusterRef cluster indices of all models 
+#' @param percThr Threshold of permutation test 
 #' @return : a list of (center, variance, radius(centroid & medoid)) for each cluster
 #' @export
+#' @importFrom stats dist
 centMedVarCutDistPerc<-function(data, clusterRef, percThr=0.01)
 {
   dataRow = t(as.matrix(data))

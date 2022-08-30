@@ -7,13 +7,13 @@
 find_topology(top_list, samp_top, minN, maxN)
 }
 \arguments{
-\item{top_list:}{a list of sampled topologies}
+\item{top_list}{a list of sampled topologies}
 
-\item{samp_top:}{the current topology}
+\item{samp_top}{the current topology}
 
-\item{minN:}{the range of circuit topologies in the list to be searched (minimum index value)}
+\item{minN}{the range of circuit topologies in the list to be searched (minimum index value)}
 
-\item{maxN:}{the range of circuit topologies in the list to be searched (maximum index value)}
+\item{maxN}{the range of circuit topologies in the list to be searched (maximum index value)}
 }
 \value{
 i: the index of the found topology in the list, or 0 if not found

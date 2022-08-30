@@ -7,15 +7,15 @@
 inNrepsample_topology(adj_matrPr, numb_cgnodes, inNodes, outNodes, old_top)
 }
 \arguments{
-\item{adj_matrPr:}{adjacency matrix of the edge probability}
+\item{adj_matrPr}{adjacency matrix of the edge probability}
 
-\item{numb_cgnodes:}{the nuymber of CG nodes}
+\item{numb_cgnodes}{the nuymber of CG nodes}
 
-\item{inNodes:}{a list of input nodes}
+\item{inNodes}{a list of input nodes}
 
-\item{outNodes:}{a list of output nodes}
+\item{outNodes}{a list of output nodes}
 
-\item{old_top:}{the last circuit topology}
+\item{old_top}{the last circuit topology}
 }
 \value{
 new_top: the new circuit topology

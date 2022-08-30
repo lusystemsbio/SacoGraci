@@ -24,40 +24,40 @@ opt_TE(
 )
 }
 \arguments{
-\item{network_top:}{topology of the full network}
+\item{network_top}{topology of the full network}
 
-\item{data:}{processed gene expression matrix}
+\item{data}{processed gene expression matrix}
 
-\item{clusterRef:}{cluster indices of all models}
+\item{clusterRef}{cluster indices of all models}
 
-\item{cenMedRef:}{cluster centers}
+\item{cenMedRef}{cluster centers}
 
-\item{cutOffM:}{cluster radii}
+\item{cutOffM}{cluster radii}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 
-\item{inTopsM:}{a list of all initial circuit topologies}
+\item{inTopsM}{a list of all initial circuit topologies}
 
-\item{output:}{a string of file prefix for saving results ("Results")}
+\item{output}{a string of file prefix for saving results ("Results")}
 
-\item{nRepeat:}{number of repeats of RACIPE simulations for each new circuit topology (5)
+\item{nRepeat}{number of repeats of RACIPE simulations for each new circuit topology (5)
 A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
 The scores will then be saved and used in future iterations, when the circuits are sampled again.}
 
-\item{modelsCGr:}{number of RACIPE models to be simulated (10000)}
+\item{modelsCGr}{number of RACIPE models to be simulated (10000)}
 
-\item{numbThr:}{number of requested threads for HPC (40)}
+\item{numbThr}{number of requested threads for HPC (40)}
 
-\item{temp_Array:}{temperatures for all replicas
+\item{temp_Array}{temperatures for all replicas
 Default: a total of 24 replicas with temperatures:
 c(1,1.05,1.1,1.15,1.2,1.25,1.3,1.5,2.0,2.5,3.0,3.5,4.0,6,9,11,13,20,28,40,55,70,90,120)}
 
-\item{iter_temp_add:}{the number of iterations (proposed swaps per replica) during the temperature addition process
+\item{iter_temp_add}{the number of iterations (proposed swaps per replica) during the temperature addition process
 Default: three runs of the procedure; (c(50,100,150))}
 
-\item{numb_iter_extra:}{number of extra iterations after the temperature addition process (1100)}
+\item{numb_iter_extra}{number of extra iterations after the temperature addition process (1100)}
 
-\item{logAlpha:}{log of the target swap rate (log(0.4))}
+\item{logAlpha}{log of the target swap rate (log(0.4))}
 }
 \value{
 df: topology of the optimized CG circuit

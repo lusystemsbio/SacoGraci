@@ -7,11 +7,11 @@
 find_in_list(xli, n, elem)
 }
 \arguments{
-\item{xli:the}{list}
+\item{xli}{the list}
 
-\item{n:}{the length of the list}
+\item{n}{the length of the list}
 
-\item{elem:}{the element to search}
+\item{elem}{the element to search}
 }
 \value{
 indli: the index of the found element in the list, or 0 if not found

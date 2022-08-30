@@ -16,21 +16,21 @@ inNWsimilarityRefCGr(
 )
 }
 \arguments{
-\item{dataRow:}{gene expression matrix with gene in rows}
+\item{dataRow}{gene expression matrix with gene in rows}
 
-\item{clusterRef:}{the cluster indices of all models}
+\item{clusterRef}{the cluster indices of all models}
 
-\item{cenMedRef:}{cluster centers}
+\item{cenMedRef}{cluster centers}
 
-\item{cutOffM:}{cluster radii}
+\item{cutOffM}{cluster radii}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 
-\item{inNodes:}{a list of input nodes}
+\item{inNodes}{a list of input nodes}
 
-\item{topol_cgr:}{the current CG circuit topology}
+\item{topol_cgr}{the current CG circuit topology}
 
-\item{modelsCGr:}{the number of RACIPE models to be simulated (10000)}
+\item{modelsCGr}{the number of RACIPE models to be simulated (10000)}
 }
 \value{
 scoresOuts: 1: the total score, 2: the number of noisy models

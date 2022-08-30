@@ -7,9 +7,9 @@
 adjMatCGrProb(data_top, gene_list)
 }
 \arguments{
-\item{data_top:}{topology of the full network}
+\item{data_top}{topology of the full network}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 }
 \value{
 adj_cgr: adjacency matrix with probabilities

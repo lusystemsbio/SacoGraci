@@ -7,11 +7,11 @@
 reordering(logscData, gene_list, geneGroupOrder = NULL)
 }
 \arguments{
-\item{logscData:}{current gene expression data matrix}
+\item{logscData}{current gene expression data matrix}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 
-\item{geneGroupOrder:}{desired order of gene groups}
+\item{geneGroupOrder}{desired order of gene groups}
 }
 \value{
 a list of reordered data (logscData) and an updated gene list (gene_list)

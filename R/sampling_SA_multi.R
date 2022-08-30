@@ -1,28 +1,30 @@
 #' Circuit optimization with Simulated Annealing (SA) algorithm (multiple threads)
-#' @param network_top: topology of the full network
-#' @param data: processed gene expression matrix
-#' @param clusterRef: cluster indices of all models
-#' @param cenMedRef: cluster centers
-#' @param cutOffM: cluster radii
-#' @param gene_list: gene clustering output 
-#' @param inTopsM: a list of all initial circuit topologies
-#' @param output: a string of file prefix for saving results ("Results")
-#' @param nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
+#' @param network_top topology of the full network
+#' @param data processed gene expression matrix
+#' @param clusterRef cluster indices of all models
+#' @param cenMedRef cluster centers
+#' @param cutOffM cluster radii
+#' @param gene_list gene clustering output 
+#' @param inTopsM a list of all initial circuit topologies
+#' @param output a string of file prefix for saving results ("Results")
+#' @param nRepeat number of repeats of RACIPE simulations for each new circuit topology (5)
 #'         A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
 #'         The scores will then be saved and used in future iterations, when the circuits are sampled again.
-#' @param modelsCGr: number of RACIPE models to be simulated (10000)
-#' @param maxT: maximum/initial temperature in SA (150)
-#' @param threshT: a second temperature in SA, below which SA has a slower temperature decaying rate (40)
-#' @param decayRate1: 1st temperature decaying rate (geometrically decaying) (0.8)
-#' @param decayRate2: 2nd temperature decaying rate (0.6), until temperature = 1 (current implementation)
-#' @param iter_per_temp: number of iterations for each fixed temperature (100)
-#' @param numbThr: number of requested threads for HPC (40) 
-#' @param nSim:  number of parallel simulations (20)
+#' @param modelsCGr number of RACIPE models to be simulated (10000)
+#' @param maxT maximum/initial temperature in SA (150)
+#' @param threshT a second temperature in SA, below which SA has a slower temperature decaying rate (40)
+#' @param decayRate1 1st temperature decaying rate (geometrically decaying) (0.8)
+#' @param decayRate2 2nd temperature decaying rate (0.6), until temperature = 1 (current implementation)
+#' @param iter_per_temp number of iterations for each fixed temperature (100)
+#' @param numbThr number of requested threads for HPC (40) 
+#' @param nSim  number of parallel simulations (20)
 #' @return df: topology of the optimized CG circuit
 #' @export
 #' @import doParallel
 #' @import parallel
 #' @import foreach
+#' @importFrom stats runif
+#' @importFrom utils read.table write.table
 opt_SA_multi<-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM, 
                        output = "Results", nRepeat= 5, modelsCGr = 10000,  
                        maxT=150, decayRate1=0.8, decayRate2=0.6, threshT=40, iter_per_temp=100,

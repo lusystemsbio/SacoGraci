@@ -20,31 +20,31 @@ opt_MH(
 )
 }
 \arguments{
-\item{network_top:}{topology of the full network}
+\item{network_top}{topology of the full network}
 
-\item{data:}{processed gene expression matrix}
+\item{data}{processed gene expression matrix}
 
-\item{clusterRef:}{cluster indices of all models}
+\item{clusterRef}{cluster indices of all models}
 
-\item{cenMedRef:}{cluster centers}
+\item{cenMedRef}{cluster centers}
 
-\item{cutOffM:}{cluster radii}
+\item{cutOffM}{cluster radii}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 
-\item{init_top:}{initial circuit topology}
+\item{init_top}{initial circuit topology}
 
-\item{output:}{a string of file prefix for saving results ("Results")}
+\item{output}{a string of file prefix for saving results ("Results")}
 
-\item{nRepeat:}{number of repeats of RACIPE simulations for each new circuit topology (5)
+\item{nRepeat}{number of repeats of RACIPE simulations for each new circuit topology (5)
 A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
 The scores will then be saved and used in future iterations, when the circuits are sampled again.}
 
-\item{nIter:}{number of iterations for each simulation (1400)}
+\item{nIter}{number of iterations for each simulation (1400)}
 
-\item{modelsCGr:}{number of RACIPE models to be simulated (10000)}
+\item{modelsCGr}{number of RACIPE models to be simulated (10000)}
 
-\item{tempM:}{temperature for MH (60)}
+\item{tempM}{temperature for MH (60)}
 }
 \value{
 df: topology of the optimized CG circuit

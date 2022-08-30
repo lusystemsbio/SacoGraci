@@ -7,11 +7,11 @@
 geneClustMedian(clustData, clSize, numbGeneClust)
 }
 \arguments{
-\item{clustData:}{model clustering data}
+\item{clustData}{model clustering data}
 
-\item{clSize:}{size of each model clusters (an output of the model clustering results)}
+\item{clSize}{size of each model clusters (an output of the model clustering results)}
 
-\item{numbGeneClust:}{number of gene clusters}
+\item{numbGeneClust}{number of gene clusters}
 }
 \value{
 gene_list: gene clustering output

@@ -1,7 +1,7 @@
 #' @title Identify input and output nodes from a circuit topology
 #' @description Input nodes: nodes with only outward edges; Output nodes: nodes with only inward edges
-#' @param adjMatrPr: Adjacency matrix with probabilities of CG-circuits derived from the full network
-#' @param num_cgnodes: number of CG nodes (an output of gene clustering)
+#' @param adjMatrPr Adjacency matrix with probabilities of CG-circuits derived from the full network
+#' @param numb_cgnodes number of CG nodes (an output of gene clustering)
 #' @return resNod: a list of input nodes (1) and output nodes (2)
 #' @export
 find_inout<-function(adjMatrPr, numb_cgnodes)
@@ -72,8 +72,8 @@ find_inout<-function(adjMatrPr, numb_cgnodes)
 }
 
 #' Mismatches between the sampled and reference circuit topologies
-#' @param sam_top: Adjacency matrix of the sampled circuit topology
-#' @param ref_top: Adjacency matrix of the reference circuit topology
+#' @param samp_top Adjacency matrix of the sampled circuit topology
+#' @param ref_top Adjacency matrix of the reference circuit topology
 #' @return : number of mismatching edges
 #' @export
 difLen<-function(samp_top, ref_top)
@@ -82,12 +82,12 @@ difLen<-function(samp_top, ref_top)
 }
 
 #' Deleting some edges from a circuit topology while trying to maintain a connected circuit
-#' @param samp_top: the current circuit topology
-#' @param numb_genes: number of genes of the circuit
-#' @param numb_del: number of edges to be deleted
-#' @param pos_del: indices of edges that can be deleted
-#' @param inNodes: a list of input nodes, output from the function find_inout
-#' @param list_top: list of sampled circuit topologies, we make sure they are not sampled again
+#' @param samp_top the current circuit topology
+#' @param numb_genes number of genes of the circuit
+#' @param numb_del number of edges to be deleted
+#' @param pos_del indices of edges that can be deleted
+#' @param inNodes a list of input nodes, output from the function find_inout
+#' @param list_top list of sampled circuit topologies, we make sure they are not sampled again
 #' @return adj_fin: the modified circuit topology
 #' @export
 #' @import igraph
@@ -169,12 +169,12 @@ delEdges_topNew<-function(samp_top, numb_genes, numb_del, pos_del, inNodes, list
 
 #' @title Making sign changes to some edges of a circuit topology 
 #' @description this process will be tried 3 times if no new circuit topology is sampled
-#' @param samp_top: the current circuit topology
-#' @param numb_genes: number of genes of the circuit
-#' @param numb_changes: number of edges with sign changes (>0)
-#' @param pos_changes: indices of edges that can have sign changes
-#' @param inNodes: a list of input nodes, output from the function find_inout
-#' @param list_top: list of sampled circuit topologies, we make sure they are not sampled again
+#' @param samp_top the current circuit topology
+#' @param numb_genes number of genes of the circuit
+#' @param numb_changes number of edges with sign changes (>0)
+#' @param pos_changes indices of edges that can have sign changes
+#' @param inNodes a list of input nodes, output from the function find_inout
+#' @param list_top list of sampled circuit topologies, we make sure they are not sampled again
 #' @return cTop: the modified circuit topology
 #' @export
 signChanges_top<-function(samp_top, numb_genes, numb_changes, pos_changes, inNodes, list_top)
@@ -266,11 +266,12 @@ signChanges_top<-function(samp_top, numb_genes, numb_changes, pos_changes, inNod
 }#end function
 
 #' Generating a series of randomly generated initial CG circuit topologies
-#' @param circuit_top: the original circuit topology
-#' @param gene_list: gene clustering output 
-#' @param numbNewTop: number of new circuit topologies to be generated
+#' @param circuit_top the original circuit topology
+#' @param gene_list gene clustering output 
+#' @param numbNewTop number of new circuit topologies to be generated
 #' @return resM: a list of randomly generated initial CG circuit topologies
 #' @export
+#' @importFrom stats runif
 gaInitial_gen<-function(circuit_top, gene_list, numbNewTop)
 {
   adjMProb<-adjMatCGrProb(circuit_top, gene_list)
@@ -404,8 +405,8 @@ gaInitial_gen<-function(circuit_top, gene_list, numbNewTop)
 }
 
 #' Builds the adjacency matrix with probabilities
-#' @param data_top: topology of the full network
-#' @param gene_list: gene clustering output 
+#' @param data_top topology of the full network
+#' @param gene_list gene clustering output 
 #' @return adj_cgr: adjacency matrix with probabilities
 #' @export
 adjMatCGrProb<-function(data_top, gene_list)
@@ -452,8 +453,8 @@ adjMatCGrProb<-function(data_top, gene_list)
 }
 
 #' Build the most dense circuit topology (adj. matrix in a vector``)
-#' @param adj_matrProb: adjacency matrix with probabilities
-#' @param numb_cgnodes: the number of CG nodes
+#' @param adj_matrProb adjacency matrix with probabilities
+#' @param numb_cgnodes the number of CG nodes
 #' @return adj_Matr:  the adj. matrix of the most dense topology as a vector
 #' @export
 #' @import igraph
@@ -500,9 +501,9 @@ initialize_topology<-function(adj_matrProb, numb_cgnodes)
 }
 
 #' Converting the adjacency matrix of a gene circuit to the topology file (Source/Target/Interaction Type)
-#' @param adjMatL: adjacency matrix
-#' @param numbG: the number of genes
-#' @param colN: a vector of gene names
+#' @param adjMatL adjacency matrix
+#' @param numbG the number of genes
+#' @param colN a vector of gene names
 #' @return data_cgr_top:  a data frame of the circuit topology
 #' @export
 convAdjTop<-function(adjMatL, numbG, colN)
@@ -539,9 +540,9 @@ convAdjTop<-function(adjMatL, numbG, colN)
 }
 
 #' Converting the topology file (Source/Target/Interaction Type) of a gene circuit to the adjacency matrix d
-#' @param data_t:  a data frame of the circuit topology
-#' @param numbG: the number of genes
-#' @param colN: a vector of gene names
+#' @param data_t  a data frame of the circuit topology
+#' @param numbG the number of genes
+#' @param colN a vector of gene names
 #' @return adjMatL: adjacency matrix
 #' @export
 convTopAdj<-function(data_t, numbG, colN)
@@ -582,10 +583,10 @@ convTopAdj<-function(data_t, numbG, colN)
 }
 
 #' Check whether the circuit topology has been sampled or not
-#' @param top_list:  a list of sampled topologies
-#' @param samp_top: the current topology
-#' @param minN: the range of circuit topologies in the list to be searched (minimum index value)
-#' @param maxN: the range of circuit topologies in the list to be searched (maximum index value)
+#' @param top_list  a list of sampled topologies
+#' @param samp_top the current topology
+#' @param minN the range of circuit topologies in the list to be searched (minimum index value)
+#' @param maxN the range of circuit topologies in the list to be searched (maximum index value)
 #' @return i: the index of the found topology in the list, or 0 if not found
 #' @export
 find_topology<-function(top_list, samp_top, minN, maxN)
@@ -615,9 +616,9 @@ find_topology<-function(top_list, samp_top, minN, maxN)
 }
 
 #' Find an element in a list
-#' @param xli:the list
-#' @param n: the length of the list
-#' @param elem: the element to search
+#' @param xli the list
+#' @param n the length of the list
+#' @param elem the element to search
 #' @return indli: the index of the found element in the list, or 0 if not found
 #' @export
 find_in_list<-function(xli, n, elem)
@@ -632,11 +633,11 @@ find_in_list<-function(xli, n, elem)
 }
 
 #' Circuit sampling
-#' @param adj_matrPr: adjacency matrix of the edge probability 
-#' @param numb_cgnodes: the nuymber of CG nodes
-#' @param inNodes: a list of input nodes
-#' @param outNodes: a list of output nodes
-#' @param old_top: the last circuit topology
+#' @param adj_matrPr adjacency matrix of the edge probability 
+#' @param numb_cgnodes the nuymber of CG nodes
+#' @param inNodes a list of input nodes
+#' @param outNodes a list of output nodes
+#' @param old_top the last circuit topology
 #' @return new_top: the new circuit topology
 #' @export
 #' @import igraph
@@ -856,7 +857,7 @@ inNrepsample_topology<-function(adj_matrPr, numb_cgnodes, inNodes, outNodes, old
     return(new_top)
   }
   
-  if(backtr<1)
+  if(backTr<1)
   {
     return (rep(0, numb_cgnodes*numb_cgnodes))
   }
@@ -864,8 +865,8 @@ inNrepsample_topology<-function(adj_matrPr, numb_cgnodes, inNodes, outNodes, old
 }#end function
 
 #' Visualize network topology
-#' @param tf_links: circuit topology
-#' @param height: plot height ("300px")
+#' @param tf_links circuit topology
+#' @param height plot height ("300px")
 #' @return network plot
 #' @export
 #' @import visNetwork

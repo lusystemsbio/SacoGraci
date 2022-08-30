@@ -7,9 +7,9 @@
 find_inout(adjMatrPr, numb_cgnodes)
 }
 \arguments{
-\item{adjMatrPr:}{Adjacency matrix with probabilities of CG-circuits derived from the full network}
+\item{adjMatrPr}{Adjacency matrix with probabilities of CG-circuits derived from the full network}
 
-\item{num_cgnodes:}{number of CG nodes (an output of gene clustering)}
+\item{numb_cgnodes}{number of CG nodes (an output of gene clustering)}
 }
 \value{
 resNod: a list of input nodes (1) and output nodes (2)

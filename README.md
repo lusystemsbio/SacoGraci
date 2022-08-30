@@ -24,6 +24,10 @@ install_github("lusystemsbio/SacoGraci", dependencies=T, build_vignettes = T)
 
 https://htmlpreview.github.io/?https://github.com/lusystemsbio/SacoGraci/blob/main/vignettes/Tutorial.html
 
+### Manual:
+
+https://github.com/lusystemsbio/SacoGraci/blob/main/SacoGraci_1.0.pdf
+
 ### Reference:
 
 Caranica C & Lu M. A Data-Driven Optimization Method for Coarse-Graining Gene Regulatory Networks. bioRxiv 2022.08.10.503498; doi: https://doi.org/10.1101/2022.08.10.503498

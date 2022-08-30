@@ -1,29 +1,31 @@
 #' Circuit optimization with temperature tempting (TE) algorithm
-#' @param network_top: topology of the full network
-#' @param data: processed gene expression matrix 
-#' @param clusterRef: cluster indices of all models
-#' @param cenMedRef: cluster centers
-#' @param cutOffM: cluster radii
-#' @param gene_list: gene clustering output 
-#' @param inTopsM: a list of all initial circuit topologies
-#' @param output: a string of file prefix for saving results ("Results")
-#' @param nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
+#' @param network_top topology of the full network
+#' @param data processed gene expression matrix 
+#' @param clusterRef cluster indices of all models
+#' @param cenMedRef cluster centers
+#' @param cutOffM cluster radii
+#' @param gene_list gene clustering output 
+#' @param inTopsM a list of all initial circuit topologies
+#' @param output a string of file prefix for saving results ("Results")
+#' @param nRepeat number of repeats of RACIPE simulations for each new circuit topology (5)
 #'         A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
 #'         The scores will then be saved and used in future iterations, when the circuits are sampled again.
-#' @param modelsCGr: number of RACIPE models to be simulated (10000)
-#' @param numbThr: number of requested threads for HPC (40) 
-#' @param temp_Array: temperatures for all replicas
+#' @param modelsCGr number of RACIPE models to be simulated (10000)
+#' @param numbThr number of requested threads for HPC (40) 
+#' @param temp_Array temperatures for all replicas
 #'        Default: a total of 24 replicas with temperatures:
 #'        c(1,1.05,1.1,1.15,1.2,1.25,1.3,1.5,2.0,2.5,3.0,3.5,4.0,6,9,11,13,20,28,40,55,70,90,120)
-#' @param iter_temp_add: the number of iterations (proposed swaps per replica) during the temperature addition process
+#' @param iter_temp_add the number of iterations (proposed swaps per replica) during the temperature addition process
 #'        Default: three runs of the procedure; (c(50,100,150)) 
-#' @param numb_iter_extra: number of extra iterations after the temperature addition process (1100)
-#' @param logAlpha: log of the target swap rate (log(0.4))
+#' @param numb_iter_extra number of extra iterations after the temperature addition process (1100)
+#' @param logAlpha log of the target swap rate (log(0.4))
 #' @return df: topology of the optimized CG circuit
 #' @export
 #' @import doParallel
 #' @import parallel
 #' @import foreach 
+#' @importFrom stats runif
+#' @importFrom utils read.table write.table
 opt_TE<-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM,
                  output = "Results", nRepeat = 5, modelsCGr = 10000,
                  numbThr = 2, temp_Array=c(1,1.05,1.1,1.15,1.2,1.25,1.3,1.5,2.0,2.5,3.0,

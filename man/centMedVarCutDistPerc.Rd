@@ -7,11 +7,11 @@
 centMedVarCutDistPerc(data, clusterRef, percThr = 0.01)
 }
 \arguments{
-\item{data:}{gene expression matrix}
+\item{data}{gene expression matrix}
 
-\item{clusterRef:}{cluster indices of all models}
+\item{clusterRef}{cluster indices of all models}
 
-\item{percThr:}{Threshold of permutation test}
+\item{percThr}{Threshold of permutation test}
 }
 \value{
 : a list of (center, variance, radius(centroid & medoid)) for each cluster

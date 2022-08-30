@@ -7,9 +7,9 @@
 geneClustInd(logscData, numbGeneClust)
 }
 \arguments{
-\item{logscData:}{simulated data after log scaling and standardization}
+\item{logscData}{simulated data after log scaling and standardization}
 
-\item{numbGeneClust:}{number of gene clusters}
+\item{numbGeneClust}{number of gene clusters}
 }
 \value{
 gene_list: gene clustering output

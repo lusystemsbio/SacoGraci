@@ -1,25 +1,27 @@
 #' Circuit optimization with Metropolis-Hastings (MH) algorithm (multiple threads)
-#' @param network_top: topology of the full network
-#' @param data: processed gene expression matrix 
-#' @param clusterRef: cluster indices of all models
-#' @param cenMedRef: cluster centers
-#' @param cutOffM: cluster radii
-#' @param gene_list: gene clustering output 
-#' @param inTopsM: a list of all initial circuit topologies
-#' @param output: a string of file prefix for saving results ("Results")
-#' @param nRepeat: number of repeats of RACIPE simulations for each new circuit topology (5)
+#' @param network_top topology of the full network
+#' @param data processed gene expression matrix 
+#' @param clusterRef cluster indices of all models
+#' @param cenMedRef cluster centers
+#' @param cutOffM cluster radii
+#' @param gene_list gene clustering output 
+#' @param inTopsM a list of all initial circuit topologies
+#' @param output a string of file prefix for saving results ("Results")
+#' @param nRepeat number of repeats of RACIPE simulations for each new circuit topology (5)
 #'         A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
 #'         The scores will then be saved and used in future iterations, when the circuits are sampled again.
-#' @param nIter: number of iterations for each simulation (1400)
-#' @param modelsCGr: number of RACIPE models to be simulated (10000)
-#' @param tempM: temperature for MH (60)
-#' @param numbThr: number of requested threads for HPC (40) 
-#' @param nSim:  number of parallel simulations (20)
+#' @param nIter number of iterations for each simulation (1400)
+#' @param modelsCGr number of RACIPE models to be simulated (10000)
+#' @param tempM temperature for MH (60)
+#' @param numbThr number of requested threads for HPC (40) 
+#' @param nSim  number of parallel simulations (20)
 #' @return df: topology of the optimized CG circuit
 #' @export
 #' @import doParallel
 #' @import parallel
 #' @import foreach
+#' @importFrom stats runif
+#' @importFrom utils read.table write.table
 opt_MH_multi <-function(network_top, data, clusterRef, cenMedRef, cutOffM, gene_list, inTopsM, 
                         output = "Results", nRepeat= 5, nIter = 1400, modelsCGr = 10000, 
                         tempM = 60, numbThr = 40, nSim = 20){

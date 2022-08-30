@@ -14,17 +14,17 @@ signChanges_top(
 )
 }
 \arguments{
-\item{samp_top:}{the current circuit topology}
+\item{samp_top}{the current circuit topology}
 
-\item{numb_genes:}{number of genes of the circuit}
+\item{numb_genes}{number of genes of the circuit}
 
-\item{numb_changes:}{number of edges with sign changes (>0)}
+\item{numb_changes}{number of edges with sign changes (>0)}
 
-\item{pos_changes:}{indices of edges that can have sign changes}
+\item{pos_changes}{indices of edges that can have sign changes}
 
-\item{inNodes:}{a list of input nodes, output from the function find_inout}
+\item{inNodes}{a list of input nodes, output from the function find_inout}
 
-\item{list_top:}{list of sampled circuit topologies, we make sure they are not sampled again}
+\item{list_top}{list of sampled circuit topologies, we make sure they are not sampled again}
 }
 \value{
 cTop: the modified circuit topology

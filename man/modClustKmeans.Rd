@@ -7,11 +7,11 @@
 modClustKmeans(data, numbClust, clustCenters)
 }
 \arguments{
-\item{data:}{data matrix for k-means clustering (either logscData or projected data)}
+\item{data}{data matrix for k-means clustering (either logscData or projected data)}
 
-\item{numbClust:}{number of model clusters}
+\item{numbClust}{number of model clusters}
 
-\item{clustCenters:}{coordinates of the cluster center}
+\item{clustCenters}{coordinates of the cluster center}
 }
 \value{
 res: model clustering output

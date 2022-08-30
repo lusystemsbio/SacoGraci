@@ -7,11 +7,11 @@
 convTopAdj(data_t, numbG, colN)
 }
 \arguments{
-\item{data_t:}{a data frame of the circuit topology}
+\item{data_t}{a data frame of the circuit topology}
 
-\item{numbG:}{the number of genes}
+\item{numbG}{the number of genes}
 
-\item{colN:}{a vector of gene names}
+\item{colN}{a vector of gene names}
 }
 \value{
 adjMatL: adjacency matrix

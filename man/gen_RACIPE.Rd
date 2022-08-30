@@ -7,13 +7,13 @@
 gen_RACIPE(dftop, nModels, integrateStepSize = 0.02, simulationTime = 200)
 }
 \arguments{
-\item{dftop:}{circuit topology}
+\item{dftop}{circuit topology}
 
-\item{nModels:}{number of RACIPE models generated}
+\item{nModels}{number of RACIPE models generated}
 
-\item{integrateStepSize:}{step size for the ODE integration}
+\item{integrateStepSize}{step size for the ODE integration}
 
-\item{simulationTime:}{simulation time of ODE for each RACIPE model}
+\item{simulationTime}{simulation time of ODE for each RACIPE model}
 }
 \value{
 logscData: simulated data after log scaling and standardization

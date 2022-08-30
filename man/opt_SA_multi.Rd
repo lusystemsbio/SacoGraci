@@ -25,41 +25,41 @@ opt_SA_multi(
 )
 }
 \arguments{
-\item{network_top:}{topology of the full network}
+\item{network_top}{topology of the full network}
 
-\item{data:}{processed gene expression matrix}
+\item{data}{processed gene expression matrix}
 
-\item{clusterRef:}{cluster indices of all models}
+\item{clusterRef}{cluster indices of all models}
 
-\item{cenMedRef:}{cluster centers}
+\item{cenMedRef}{cluster centers}
 
-\item{cutOffM:}{cluster radii}
+\item{cutOffM}{cluster radii}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 
-\item{inTopsM:}{a list of all initial circuit topologies}
+\item{inTopsM}{a list of all initial circuit topologies}
 
-\item{output:}{a string of file prefix for saving results ("Results")}
+\item{output}{a string of file prefix for saving results ("Results")}
 
-\item{nRepeat:}{number of repeats of RACIPE simulations for each new circuit topology (5)
+\item{nRepeat}{number of repeats of RACIPE simulations for each new circuit topology (5)
 A new circuit is simulated by RACIPE nRepeat times for robust score evaluation; 
 The scores will then be saved and used in future iterations, when the circuits are sampled again.}
 
-\item{modelsCGr:}{number of RACIPE models to be simulated (10000)}
+\item{modelsCGr}{number of RACIPE models to be simulated (10000)}
 
-\item{maxT:}{maximum/initial temperature in SA (150)}
+\item{maxT}{maximum/initial temperature in SA (150)}
 
-\item{threshT:}{a second temperature in SA, below which SA has a slower temperature decaying rate (40)}
+\item{decayRate1}{1st temperature decaying rate (geometrically decaying) (0.8)}
 
-\item{decayRate1:}{1st temperature decaying rate (geometrically decaying) (0.8)}
+\item{decayRate2}{2nd temperature decaying rate (0.6), until temperature = 1 (current implementation)}
 
-\item{decayRate2:}{2nd temperature decaying rate (0.6), until temperature = 1 (current implementation)}
+\item{threshT}{a second temperature in SA, below which SA has a slower temperature decaying rate (40)}
 
-\item{iter_per_temp:}{number of iterations for each fixed temperature (100)}
+\item{iter_per_temp}{number of iterations for each fixed temperature (100)}
 
-\item{numbThr:}{number of requested threads for HPC (40)}
+\item{numbThr}{number of requested threads for HPC (40)}
 
-\item{nSim:}{number of parallel simulations (20)}
+\item{nSim}{number of parallel simulations (20)}
 }
 \value{
 df: topology of the optimized CG circuit

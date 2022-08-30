@@ -7,11 +7,11 @@
 gaInitial_gen(circuit_top, gene_list, numbNewTop)
 }
 \arguments{
-\item{circuit_top:}{the original circuit topology}
+\item{circuit_top}{the original circuit topology}
 
-\item{gene_list:}{gene clustering output}
+\item{gene_list}{gene clustering output}
 
-\item{numbNewTop:}{number of new circuit topologies to be generated}
+\item{numbNewTop}{number of new circuit topologies to be generated}
 }
 \value{
 resM: a list of randomly generated initial CG circuit topologies

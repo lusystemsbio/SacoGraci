@@ -7,9 +7,9 @@
 modClustHCA(logscData, numbClust)
 }
 \arguments{
-\item{logscData:}{simulated data after log scaling and standardization}
+\item{logscData}{simulated data after log scaling and standardization}
 
-\item{numbClust:}{number of model clusters}
+\item{numbClust}{number of model clusters}
 }
 \value{
 res: model clustering output: (1: cluster sizes; 2: clustering rearranged data; 3: cluster indices)
